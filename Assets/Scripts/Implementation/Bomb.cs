@@ -28,17 +28,6 @@ public class Bomb : MonoBehaviour, IStaticUnit
             Destroy(this.gameObject);
     }
 
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        var aliveUnit = other.GetComponent<IAliveUnit>();
-
-        if (aliveUnit != null && !_radiusUnits.TryGetValue(aliveUnit.ToString(), out IAliveUnit unit))
-        {
-            Debug.Log(aliveUnit.ToString());
-            _radiusUnits.Add(aliveUnit.ToString(), aliveUnit);
-        }
-    }
-
     private void OnTriggerExit2D(Collider2D other)
     {
         var aliveUnit = other.GetComponent<IAliveUnit>();
@@ -49,7 +38,11 @@ public class Bomb : MonoBehaviour, IStaticUnit
 
     public void ToInteract(IAliveUnit unit)
     {
-        unit.GetDamage(_bombDamage);
+        if (unit != null && !_radiusUnits.TryGetValue(unit.ToString(), out IAliveUnit unit1))
+        {
+            Debug.Log(unit.ToString());
+            _radiusUnits.Add(unit.ToString(), unit);
+        }
     }
 
     IEnumerator Boom()
@@ -59,7 +52,7 @@ public class Bomb : MonoBehaviour, IStaticUnit
         
         for (var i = 0; i < itemsToDamage.Count; i++)
         {
-            ToInteract(itemsToDamage[i]);
+            itemsToDamage[i].GetDamage(_bombDamage);
         }
 
         var animObj = transform.parent ? transform.parent : transform;

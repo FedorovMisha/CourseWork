@@ -48,11 +48,15 @@ public class PlayerController : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D other)
         {
             var staticUnit = other.gameObject.GetComponent<IStaticUnit>();
-            if(!(staticUnit is Bomb))
-                staticUnit?.ToInteract(player);
+            
+            staticUnit?.ToInteract(player);
         }
 
-
-
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        var staticUnit = other.gameObject.GetComponent<IStaticUnit>();
+            
+        staticUnit?.ToInteract(player);
+    }
 }
 

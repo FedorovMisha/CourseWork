@@ -63,11 +63,11 @@ using Abstraction;
     public void GetDamage(float damage)
     {
         Health -= damage;
-            if (Health <= 0)
-            {
-                Kill();
-            }
-            Debug.Log("Test unit: " + Health);
+        if (Health <= 0)
+        {
+            Kill();
+        }
+        Debug.Log("Test unit: " + Health);
     }
 
     public void RestoreHealth(float restoredHealth)
