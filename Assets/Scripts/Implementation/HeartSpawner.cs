@@ -1,53 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using Abstraction;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class HeartSpawner : MonoBehaviour
+
+namespace Implementation
 {
-    public static int Count { get; set; } = 0;
-    [SerializeField] private List<Vector3> spawnPoints = new List<Vector3>();
-    private int maxHearts = 1;
-    [SerializeField]private List<GameObject> heartsMap = new List<GameObject>();
-    [SerializeField] private GameObject heartPrefab;
-    [SerializeField] private float duration = 1f;
-    private int _current = 0;
-    [SerializeField] private float delta = 10f;
-    
-    // Start is called before the first frame update
-    void Start()
+    public class HeartSpawner : MonoBehaviour, ISpawnSubscriber
     {
-        maxHearts = spawnPoints.Count == 1? 1: Mathf.FloorToInt(spawnPoints.Count / 2);
-        Debug.Log(maxHearts);
-        for (int i = 0; i < spawnPoints.Count; i++)
+        [SerializeField] public GameObject prefab;
+        [SerializeField] private Vector3 spawnPoint;
+        [SerializeField]private GameObject _spawnObj = null;
+
+        public void Start()
         {
-            heartsMap.Add(null);
+            var position= this.gameObject.transform.position;
+            
+            spawnPoint = new Vector3(position.x,
+                position.y + prefab.transform.localScale.y / 2,
+                position.z);
+
         }
 
-        StartCoroutine(Spawn());
-    }
-    
-    IEnumerator Spawn()
-    {
-        while (true)
+        public void FixedUpdate()
         {
-
-            yield return new WaitForSeconds(duration);
-            if (Count < maxHearts)
+            if (_spawnObj == null)
             {
-                var spawnPoint = Random.Range(0, spawnPoints.Count);
-                while (heartsMap[spawnPoint] != null)
-                {
-                    spawnPoint = Random.Range(0, spawnPoints.Count);
-                }
-
-                heartsMap[spawnPoint] = Instantiate(heartPrefab);
-
-                heartsMap[spawnPoint].transform.position = spawnPoints[spawnPoint];
-                Count++;
-                yield return new WaitForSeconds(duration * 10f);
+                IsSpawned = false;
             }
         }
 
+        public bool IsSpawned { get; set; } = false;
+
+        public void UpdateSubscriber(Action action)
+        {
+            Spawn(action);
+        }
+
+        private void Spawn(Action action)
+        {
+            if (!IsSpawned)
+            {
+                IsSpawned = true;
+                var obj = Instantiate(prefab);
+                var responsive = obj.GetComponent<IResponsive>();
+                if (responsive != null)
+                {
+                    responsive.OnChange += IsDestroy;
+                    responsive.OnChange += action;
+                }
+
+                obj.transform.position = spawnPoint;
+                _spawnObj = obj;
+            }
+        }
+
+        private void IsDestroy()
+        {
+            IsSpawned = false;
+            _spawnObj = null;
+        }
     }
 }

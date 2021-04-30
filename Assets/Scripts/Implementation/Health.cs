@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Implementation
 {
-    public class Health : MonoBehaviour, IStaticUnit 
+    public class Health : MonoBehaviour, IStaticUnit, IResponsive
     {
         [SerializeField] private Sprite sprite;
         private float _restoreHealth = 10f;
@@ -17,8 +17,10 @@ namespace Implementation
 
         public void Kill()
         {
+            OnChange.Invoke();
             Destroy(this.gameObject);
         }
-        
+
+        public Action OnChange { get; set; }
     }
 }
