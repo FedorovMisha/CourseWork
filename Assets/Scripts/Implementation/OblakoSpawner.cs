@@ -8,13 +8,14 @@ public class OblakoSpawner : MonoBehaviour
 {
     public GameObject Oblako;
     public Transform OblakoPoint;
-    int YPoint = Random.Range(8,11);
+    int YPoint;
     private float timeBltShots;
     public float startTimeBltShots;
     Vector3 point;
  
     private void Start()
     {
+        YPoint = Random.Range(8, 11);
         point.x= OblakoPoint.position.x;
         point.y= OblakoPoint.position.y;
         point.z= OblakoPoint.position.z;
