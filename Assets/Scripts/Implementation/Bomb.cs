@@ -8,12 +8,21 @@ using UnityEngine;
 public class Bomb : MonoBehaviour, IStaticUnit
 {
     [SerializeField] private readonly float _bombDamage = 40f;
+    Rigidbody2D rb;
+
+    public float speedRotate;
 
     private readonly Dictionary<string, IAliveUnit> _radiusUnits = new Dictionary<string, IAliveUnit>();
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Boom());
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void FixedUpdate()
+    {
+        rb.velocity = new Vector2(speedRotate, rb.velocity.y);
     }
 
     // Update is called once per frame
