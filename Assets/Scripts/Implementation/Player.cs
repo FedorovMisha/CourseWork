@@ -1,7 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Abstraction;
 
-[System.Serializable] public class Player: IAliveUnit
+[System.Serializable] public class Player: MonoBehaviour, IAliveUnit
 {
     private const int MAXHealth = 101;
     public float Health{ get; set; } = 100;
@@ -22,18 +24,25 @@ using Abstraction;
     public Transform weaponPose; // Оружие
     public Transform gunPoint;
    
-    float curTimeout;
+    private float timeBltShots;
+    public float startTimeBltShots;
     
     [HideInInspector] public Rigidbody2D rb;
    // [HideInInspector] public Animator anim; 
     float rotateGun;
     float horizontalMove = 0f, verticallMove = 0f;
 
+      private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+       // player.anim = GetComponent<Animator>();
+    }
+
     public void Traffic()
     {
         horizontalMove = joystickRun.Horizontal;
         rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
-
+        
          Flip(joystickRun);
             if (horizontalMove == 0)
             {
@@ -57,7 +66,19 @@ using Abstraction;
 
     public void Attack()
     {
-      
+       if (timeBltShots <= 0)
+        {
+            if (joystickShooting.Horizontal > 0.3f || joystickShooting.Vertical > 0.3f )
+            {
+                Instantiate(bullet, gunPoint.position, weaponPose.transform.rotation);
+                timeBltShots = startTimeBltShots;
+            }
+            
+        }
+        else
+        {
+            timeBltShots -= Time.deltaTime;
+        }
     }
 
     public void GetDamage(float damage)
@@ -67,7 +88,7 @@ using Abstraction;
         {
             Kill();
         }
-        Debug.Log("Test unit: " + Health);
+        Debug.Log("Damage: " + Health);
     }
 
     public void RestoreHealth(float restoredHealth)
@@ -82,7 +103,7 @@ using Abstraction;
 
     public void Kill()
     {
-        
+        //Time.timeScale = 0;
     }
 
 
@@ -118,5 +139,19 @@ using Abstraction;
                 weaponPose.localRotation = Quaternion.Euler(0, 0, 0);
             }
     }
+
+     public void OnTriggerEnter2D(Collider2D other)
+    {
+        var staticUnit = other.gameObject.GetComponent<IStaticUnit>();
+            
+        staticUnit?.ToInteract(this);
+    }
+
+      public void OnCollisionEnter2D(Collision2D other)
+        {
+            var staticUnit = other.gameObject.GetComponent<IStaticUnit>();
+            
+            staticUnit?.ToInteract(this);
+        }
 
 }
