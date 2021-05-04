@@ -2435,7 +2435,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194478103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.9, y: 0.15529299, z: -5.059574}
+  m_LocalPosition: {x: 7.85, y: -1.64, z: -5.059574}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_Children:
   - {fileID: 1084143397}
@@ -2915,7 +2915,7 @@ GameObject:
   - component: {fileID: 1428851088}
   - component: {fileID: 1428851090}
   m_Layer: 0
-  m_Name: PortalGun (2)
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2999,7 +2999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 4339892595990855391, guid: 6deb021d4b65af24888599f8b41419c8, type: 3}
-  spawnPoint: {x: -1.7, y: -1.89, z: 0}
+  spawnPoint: {x: -1.7, y: -1.7, z: 0}
   _spawnObj: {fileID: 0}
 --- !u!1 &1455228100
 GameObject:
@@ -4974,7 +4974,7 @@ GameObject:
   - component: {fileID: 2141024054}
   - component: {fileID: 2141024056}
   m_Layer: 0
-  m_Name: PortalGun (1)
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5058,7 +5058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 4339892595990855391, guid: 6deb021d4b65af24888599f8b41419c8, type: 3}
-  spawnPoint: {x: 0, y: 0, z: 0}
+  spawnPoint: {x: -1.7, y: -1.6, z: 0}
   _spawnObj: {fileID: 0}
 --- !u!1001 &5409147585535597195
 PrefabInstance:
@@ -5070,6 +5070,14 @@ PrefabInstance:
     - target: {fileID: 5409147584374821273, guid: 0b5ed693be6117d4d9d6ae875c55835c, type: 3}
       propertyPath: m_Name
       value: Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 5409147584374821278, guid: 0b5ed693be6117d4d9d6ae875c55835c, type: 3}
+      propertyPath: spawnPoint.x
+      value: -1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5409147584374821278, guid: 0b5ed693be6117d4d9d6ae875c55835c, type: 3}
+      propertyPath: spawnPoint.y
+      value: -1.6
       objectReference: {fileID: 0}
     - target: {fileID: 5409147584374821279, guid: 0b5ed693be6117d4d9d6ae875c55835c, type: 3}
       propertyPath: m_RootOrder

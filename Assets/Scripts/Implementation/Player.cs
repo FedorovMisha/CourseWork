@@ -68,7 +68,7 @@ using Abstraction;
     {
        if (timeBltShots <= 0)
         {
-            if (joystickShooting.Horizontal > 0.3f || joystickShooting.Vertical > 0.3f )
+            if (joystickShooting.Horizontal > 0.3f || joystickShooting.Vertical > 0.3f || joystickShooting.Horizontal < -0.3f || joystickShooting.Vertical < -0.3f)
             {
                 Instantiate(bullet, gunPoint.position, weaponPose.transform.rotation);
                 timeBltShots = startTimeBltShots;
