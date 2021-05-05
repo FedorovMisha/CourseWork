@@ -98,6 +98,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: -4010983113771346580, guid: 193c32a25483f4d458da9c2dcb0ebfac, type: 3}
+  Freg: 2
+  Amp: 0.25
+  t: 0
+  offset: 0
+  StartPos: {x: 0, y: 0}
 --- !u!50 &4339892595990855379
 Rigidbody2D:
   serializedVersion: 4
@@ -129,7 +134,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
