@@ -1,9 +1,13 @@
-﻿namespace Abstraction
+﻿using UnityEngine;
+
+namespace Abstraction
 {
     public interface IAliveUnit : IUnit
     {
         void Traffic();
 
+        void Traffic(Vector3 to);
+        
         void Jump();
 
         void Attack();
