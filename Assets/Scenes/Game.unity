@@ -4801,7 +4801,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombi
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 987088727899581201, guid: 9e3a862628a4d4b41b0d76cfd42bc13c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9e3a862628a4d4b41b0d76cfd42bc13c, type: 3}
 --- !u!1001 &5409147585535597195
 PrefabInstance:
