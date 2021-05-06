@@ -6,7 +6,7 @@ namespace Implementation
 {
     public class EnemyBullet : MonoBehaviour, IStaticUnit
     {
-        public float speedBullet = 7f;
+        public float speedBullet = 10f;
         public float startTimeBltShots;
         private float timeBltShots;
 
@@ -38,7 +38,7 @@ namespace Implementation
             if(unit is IEnemy)
                 return;
             
-            unit.GetDamage(20f);
+            unit.GetDamage(5f);
             Kill();
         }
     }

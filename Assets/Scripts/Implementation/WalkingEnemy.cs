@@ -11,6 +11,10 @@ namespace Implementation
 
         #region Fields
 
+        [SerializeField] private GameObject gunObj;
+
+        private GameObject gunFocusObj;
+        
         private bool _isReload = false;
 
         private int _bulletCapacity = 10;
@@ -19,7 +23,7 @@ namespace Implementation
         
         private float _reloadTime = 1f;
 
-        private float _shootDuration = 0.3f;
+        private float _shootDuration = 0.2f;
         
         [SerializeField] private float enemySpeed = 10f;
 
@@ -115,7 +119,8 @@ namespace Implementation
                     return;
                 }
 
-                _shootDuration = 0.3f;
+                _shootDuration = 0.2f;
+                
                 var bullet = Instantiate(_bulletPrefab);
 
                 if (bullet != null)
@@ -146,9 +151,9 @@ namespace Implementation
             Debug.Log("enemy");
         }
 
-        public void Attack(Vector2 position)
+        public void Focus(GameObject focusObj)
         {
-            
+            gunFocusObj = focusObj;
         }
 
         public bool CanGoForward()

@@ -51,6 +51,8 @@ namespace Controller
             _enemyTracker = trackComp;
 
             // StartCoroutine(StopedReaction());
+            
+            _enemy.Focus(_playerTracker.GetTrackedObject());
         }
 
 
