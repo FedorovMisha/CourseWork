@@ -4050,7 +4050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2440063e2268637469accdc7dcb817d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 15
+  jumpForce: 9
   speed: 9
   joystickRun: {fileID: 1070601951}
   joystickShooting: {fileID: 513239132}
@@ -4749,6 +4749,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 699199910979866114, guid: 9e3a862628a4d4b41b0d76cfd42bc13c, type: 3}
+      propertyPath: m_PlayAutomatically
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 987088727509384563, guid: 9e3a862628a4d4b41b0d76cfd42bc13c, type: 3}
       propertyPath: trackObj
       value: 

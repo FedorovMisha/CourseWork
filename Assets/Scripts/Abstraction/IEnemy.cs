@@ -1,4 +1,6 @@
-﻿namespace Abstraction
+﻿using UnityEngine;
+
+namespace Abstraction
 {
     public interface IEnemy : IAliveUnit
     {

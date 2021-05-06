@@ -15,9 +15,11 @@ namespace Implementation
 
         private int _bulletCapacity = 10;
 
-        private float _reloadTime = 5f;
+        private Animation animationComponent;
+        
+        private float _reloadTime = 1f;
 
-        private float _shootDuration = 1f;
+        private float _shootDuration = 0.3f;
         
         [SerializeField] private float enemySpeed = 10f;
 
@@ -47,6 +49,7 @@ namespace Implementation
         {
             _enemyRigidbody = GetComponent<Rigidbody2D>();
             direction = Vector2.right * deltaSpeed;
+            animationComponent = GetComponent<Animation>();
         }
 
         public void Kill()
@@ -57,18 +60,23 @@ namespace Implementation
         public void Traffic()
         {
             // Debug.Log("Move");
+            animationComponent.Play("ENEMY_WALK");
             _movementVector = CurrentPosition;
             direction.y = _enemyRigidbody.velocity.y;
             var moveDir = direction;
             moveDir.x = moveDir.x * enemySpeed;
             var oldJumpForce = jumpForce;
             _enemyRigidbody.velocity = moveDir;
-
         }
 
         public void Traffic(Vector3 to)
         {
-            if (to.x < CurrentPosition.x)
+            if (Mathf.Abs(Mathf.Abs(to.x) - Mathf.Abs(CurrentPosition.x)) < 0.2f)
+            {
+                direction = Vector2.zero;
+                
+            }
+            else if (to.x < CurrentPosition.x)
             {
                 direction = Vector2.left * deltaSpeed;
                 this.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
@@ -98,6 +106,7 @@ namespace Implementation
 
         public void Attack()
         {
+            animationComponent.Stop("ENEMY_WALK");
             if (!_isReload)
             {
                 if (_shootDuration > 0)
@@ -106,13 +115,13 @@ namespace Implementation
                     return;
                 }
 
-                _shootDuration = 1f;
+                _shootDuration = 0.3f;
                 var bullet = Instantiate(_bulletPrefab);
 
                 if (bullet != null)
                 {
                     bullet.transform.rotation = transform.rotation;
-
+        
                     bullet.transform.position = transform.position;
                 }
 
@@ -137,6 +146,11 @@ namespace Implementation
             Debug.Log("enemy");
         }
 
+        public void Attack(Vector2 position)
+        {
+            
+        }
+
         public bool CanGoForward()
         {
             return !Physics2D.OverlapCircle(forwardCheck.position,0.01f,layerMask);
@@ -156,7 +170,7 @@ namespace Implementation
                 return;
             }
             _isReload = true;
-            _reloadTime = 5f;
+            _reloadTime =1f;
             _bulletCapacity = 10;
         }
 
