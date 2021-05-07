@@ -54,6 +54,11 @@ using Abstraction;
             }  
     }
 
+    public void Traffic(Vector3 to)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void Jump()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
