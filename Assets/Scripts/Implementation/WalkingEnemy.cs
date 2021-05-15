@@ -194,7 +194,7 @@ namespace Implementation
         {
             var component = other.gameObject.GetComponent<IStaticUnit>();
             
-            Debug.Log(component is Bullet);
+            // Debug.Log(component is Bullet);
             
             if(component != null && component is Bullet)
                 component.ToInteract(this);
