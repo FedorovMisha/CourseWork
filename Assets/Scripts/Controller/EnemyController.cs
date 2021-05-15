@@ -60,7 +60,7 @@ namespace Controller
         private void FixedUpdate()
         {
             var detect =  DetectPlayer();
-            Debug.Log(_playerTracker.GetTrackedObject().name + " Enemy: " + gameObject.name);
+            // Debug.Log(_playerTracker.GetTrackedObject().name + " Enemy: " + gameObject.name);
             if (_enemy.CanGoForward() && !detect)
                     _enemy.Traffic(_playerTracker.GetPosition());
             else
