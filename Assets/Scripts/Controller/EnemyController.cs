@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Abstraction;
+using Implementation;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -39,6 +40,8 @@ namespace Controller
 
         private void Start()
         {
+            trackObj = Scene.UnitTracker;
+            
             var track = trackObj.GetComponent<ITracker>();
             var component = enemyObj.GetComponent<IEnemy>();
             Enemy = component;
@@ -50,8 +53,6 @@ namespace Controller
             _playerTracker = track;
             _enemyTracker = trackComp;
 
-            // StartCoroutine(StopedReaction());
-            
             _enemy.Focus(_playerTracker.GetTrackedObject());
         }
 
@@ -59,6 +60,7 @@ namespace Controller
         private void FixedUpdate()
         {
             var detect =  DetectPlayer();
+            Debug.Log(_playerTracker.GetTrackedObject().name + " Enemy: " + gameObject.name);
             if (_enemy.CanGoForward() && !detect)
                     _enemy.Traffic(_playerTracker.GetPosition());
             else

@@ -15,15 +15,10 @@ public class PlayerController : MonoBehaviour
         player.WeaponRotate();
         if (player.joystickRun.Vertical > .5f)
         {
-        player.Jump();
+            player.Jump();
         }
         player.Attack();
     }
-
-        
-
-  
-
    
 }
 
