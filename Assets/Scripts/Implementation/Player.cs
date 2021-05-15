@@ -21,6 +21,7 @@ using Abstraction;
 
      /*Стрельба*/
     public GameObject bullet;
+    public GameObject MenuKill;
     public Transform weaponPose; // Оружие
     public Transform gunPoint;
    
@@ -36,6 +37,15 @@ using Abstraction;
     {
         rb = GetComponent<Rigidbody2D>();
        // player.anim = GetComponent<Animator>();
+    }
+
+    private void FixedUpdate()
+    {
+        if(transform.position.y < - 18.0f)
+        {
+          Kill();
+          Debug.Log("Kill");
+        }
     }
 
     public void Traffic()
@@ -108,7 +118,9 @@ using Abstraction;
 
     public void Kill()
     {
-        //Time.timeScale = 0;
+        Time.timeScale = 0;
+        MenuKill.SetActive(true);
+        
     }
 
 

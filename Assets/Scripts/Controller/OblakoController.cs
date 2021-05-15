@@ -9,7 +9,7 @@ public class OblakoController : MonoBehaviour
     {
         transform.Translate(Vector2.right*speedOblako*Time.deltaTime);
         
-        if(transform.position.x > 50)
+        if(transform.position.x >115)
         {
            Destroy(this.gameObject); 
         }
