@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 987088727899581203}
   - component: {fileID: 2601516780939893013}
   - component: {fileID: 699199910979866114}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Zombi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
