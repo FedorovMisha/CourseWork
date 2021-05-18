@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Abstraction;
 
-[System.Serializable] public class Player: MonoBehaviour, IAliveUnit
+[System.Serializable]
+public class Player : MonoBehaviour, IAliveUnit
 {
     private const int MAXHealth = 101;
-    public float Health{ get; set; } = 100;
+    public float Health { get; set; } = 100;
     public float jumpForce;
-    public float speed; 
+
+    public float speed;
+
     /*Джойстики*/
     public Joystick joystickRun;
     public Joystick joystickShooting;
@@ -19,21 +22,25 @@ using Abstraction;
     float checkRadius = 0.1f;
     bool isGrounded;
 
-     /*Стрельба*/
+    /*Стрельба*/
     public GameObject bullet;
     public GameObject MenuKill;
     public Transform weaponPose; // Оружие
     public Transform gunPoint;
-   
+
     private float timeBltShots;
     public float startTimeBltShots;
-    
+
     [HideInInspector] public Rigidbody2D rb;
-   // [HideInInspector] public Animator anim; 
+
+    // [HideInInspector] public Animator anim; 
     float rotateGun;
     float horizontalMove = 0f, verticallMove = 0f;
 
-      private void Start()
+    //Kill
+    // public GameObject KillTrigger;
+
+private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
        // player.anim = GetComponent<Animator>();
@@ -41,12 +48,8 @@ using Abstraction;
 
     private void FixedUpdate()
     {
-        if(transform.position.y < - 18.0f)
-        {
-          Kill();
-          Debug.Log("Kill");
-        }
     }
+    
 
     public void Traffic()
     {
@@ -120,7 +123,6 @@ using Abstraction;
     {
         Time.timeScale = 0;
         MenuKill.SetActive(true);
-        
     }
 
 
@@ -160,7 +162,7 @@ using Abstraction;
      public void OnTriggerEnter2D(Collider2D other)
     {
         var staticUnit = other.gameObject.GetComponent<IStaticUnit>();
-            
+        
         staticUnit?.ToInteract(this);
     }
 
