@@ -1,5 +1,4 @@
-﻿using System;
-using Abstraction;
+﻿using Abstraction;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -18,7 +17,7 @@ namespace Implementation
         private bool _isReload = false;
 
         private int _bulletCapacity = 10;
-
+        
         private Animation animationComponent;
         
         private float _reloadTime = 1f;
@@ -78,7 +77,6 @@ namespace Implementation
             if (Mathf.Abs(Mathf.Abs(to.x) - Mathf.Abs(CurrentPosition.x)) < 0.2f)
             {
                 direction = Vector2.zero;
-                
             }
             else if (to.x < CurrentPosition.x)
             {
@@ -150,6 +148,8 @@ namespace Implementation
         {
             Debug.Log("enemy");
         }
+
+        public Vector3 PlayerPosition { get; set; }
 
         public void Focus(GameObject focusObj)
         {

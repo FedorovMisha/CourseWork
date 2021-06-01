@@ -23,6 +23,8 @@ namespace Controller
         private IEnemy _enemy = default;
 
         [FormerlySerializedAs("LayerMask")] [SerializeField] private LayerMask layerMask;
+
+        [SerializeField]private float detectRadius;
         
         [SerializeField] private GameObject enemyTracker;
         public IEnemy Enemy
@@ -41,7 +43,7 @@ namespace Controller
         private void Start()
         {
             trackObj = Scene.UnitTracker;
-            
+
             var track = trackObj.GetComponent<ITracker>();
             var component = enemyObj.GetComponent<IEnemy>();
             Enemy = component;
@@ -59,6 +61,7 @@ namespace Controller
 
         private void FixedUpdate()
         {
+            _enemy.PlayerPosition = _playerTracker.GetPosition();
             var detect =  DetectPlayer();
             // Debug.Log(_playerTracker.GetTrackedObject().name + " Enemy: " + gameObject.name);
             if (_enemy.CanGoForward() && !detect)
@@ -84,12 +87,18 @@ namespace Controller
         private bool DetectPlayer()
         {
             var result = false;
-            RaycastHit2D hit = Physics2D.Raycast(_enemyTracker.GetPosition(), enemyObj.transform.right * 5f, 5f, layerMask: layerMask);
-            Debug.DrawRay(_enemyTracker.GetPosition(), enemyObj.transform.right * 5f, Color.red);
+            Debug.Log("Detect player");
+            RaycastHit2D hit = Physics2D.Raycast(_enemyTracker.GetPosition(), _playerTracker.GetPosition() - _enemyTracker.GetPosition() , detectRadius, layerMask: layerMask);
+            Debug.DrawRay(_enemyTracker.GetPosition(), Vector3.ClampMagnitude(_playerTracker.GetPosition() - _enemyTracker.GetPosition(), 5f), Color.red);
             if (hit)
             {
-                // Debug.Log("Hit something:" + hit.transform.name);
                 result = true;
+                if (_enemyTracker.GetTrackedObject().name.Contains("FlyingEnemy"))
+                {
+                    Debug.Log("Player detected");
+                    result = Mathf.Abs(_playerTracker.GetPosition().x - _enemyTracker.GetPosition().x) < 1f;
+                }
+                // Debug.Log("Hit something:" + hit.transform.name);
             }
 
             return result;

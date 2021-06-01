@@ -48,6 +48,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
+  detectRadius: 5
   enemyTracker: {fileID: 4104951728366841718}
 --- !u!1 &2476446267824025082
 GameObject:

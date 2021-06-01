@@ -12,6 +12,8 @@ public class Bomb : MonoBehaviour, IStaticUnit
 
     public float speedRotate;
 
+    [SerializeField]private float durationBeforeBoom;
+    
     private readonly Dictionary<string, IAliveUnit> _radiusUnits = new Dictionary<string, IAliveUnit>();
     // Start is called before the first frame update
     void Start()
@@ -56,7 +58,7 @@ public class Bomb : MonoBehaviour, IStaticUnit
 
     IEnumerator Boom()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(durationBeforeBoom);
         var itemsToDamage = _radiusUnits.Values.ToList();
         
         for (var i = 0; i < itemsToDamage.Count; i++)
